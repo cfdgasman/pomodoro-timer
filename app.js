@@ -14,7 +14,16 @@ let mode = "focus";
 let remaining = DURATIONS[mode];
 let endAt = null;
 let tick = null;
-let completed = 0;
+const COUNT_KEY = "pomodoro:" + new Date().toISOString().slice(0, 10);
+let completed = loadCount();
+
+function loadCount() {
+  try {
+    return Number(localStorage.getItem(COUNT_KEY)) || 0;
+  } catch {
+    return 0;
+  }
+}
 
 const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
@@ -73,6 +82,11 @@ function finish() {
   if (mode === "focus") {
     completed += 1;
     countEl.textContent = completed;
+    try {
+      localStorage.setItem(COUNT_KEY, completed);
+    } catch {
+      // storage unavailable; the count just won't persist
+    }
     setMode(completed % 4 === 0 ? "long" : "short");
   } else {
     setMode("focus");
@@ -93,4 +107,5 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+countEl.textContent = completed;
 draw();
