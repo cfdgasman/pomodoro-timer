@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pomodoro Timer</title>
+  <meta name="description" content="A minimal Pomodoro focus timer.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-mode="focus">
+  <main>
+    <h1>Pomodoro</h1>
+
+    <nav class="modes" aria-label="Timer mode">
+      <button data-mode="focus" class="active">Focus</button>
+      <button data-mode="short">Short break</button>
+      <button data-mode="long">Long break</button>
+    </nav>
+
+    <div class="clock" id="clock" aria-live="polite">25:00</div>
+
+    <div class="controls">
+      <button id="start" class="primary">Start</button>
+      <button id="reset">Reset</button>
+    </div>
+
+    <p class="count">Completed focus sessions: <strong id="count">0</strong></p>
+
+    <footer>
+      Space = start/pause · R = reset ·
+      <a href="https://github.com/cfdgasman/pomodoro-timer" target="_blank" rel="noopener">Source</a>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
